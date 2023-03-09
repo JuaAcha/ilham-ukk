@@ -12,7 +12,7 @@
             @csrf
 
             <div class="form-group">
-                <label for="name">Name</label>
+                <label for="name">Nama Depan</label>
                 <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" id="name"
                     placeholder="First name" autocomplete="off" value="{{ old('name') }}">
                 @error('name')
@@ -21,7 +21,7 @@
             </div>
 
             <div class="form-group">
-                <label for="last_name">Last Name</label>
+                <label for="last_name">Nama Belakang</label>
                 <input type="text" class="form-control @error('last_name') is-invalid @enderror" name="last_name"
                     id="last_name" placeholder="Last name" autocomplete="off" value="{{ old('last_name') }}">
                 @error('last_name')

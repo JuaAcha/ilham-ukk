@@ -641,7 +641,7 @@
                     &copy; <a class="text-white font-weight-medium" href="#">Achmad Ilham M.a</a>. Copyright 2023.
 
                     <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
-                    Designed by <a class="text-white font-weight-medium" href="https://instagram.com/hams.dry?igshid=YmMyMTA2M2Y=">HamsSkie The Progamer</a>
+                    Designed by <a class="text-white font-weight-medium" href="https://instagram.com/hamsskie.pengen.mpl?igshid=YmMyMTA2M2Y=">HamsSkie The Progamer</a>
                 </p>
             </div>
             <!-- Footer End -->

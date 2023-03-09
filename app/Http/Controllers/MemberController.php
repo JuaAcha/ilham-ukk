@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Member;
-use App\Outlet;
 use Illuminate\Http\Request;
 
 class MemberController extends Controller
@@ -31,7 +30,7 @@ class MemberController extends Controller
     public function create()
     {
         return view('member.create', [
-            'title' => 'New Membership',
+            'title' => 'Membuat Membership Baru',
         ]);
     }
 
@@ -51,16 +50,16 @@ class MemberController extends Controller
         // ]);
 
         $this->validate($request , [
-            'nama' => 'required',
-            'alamat' => 'required',
+            'nama' => 'required|alpha|max:255',
+            'alamat' => 'required|alpha|max:255',
             'jenis_kelamin' => 'required',
-            'tlp' => 'required'
+            'telepon' => 'required|numeric'
 
         ]);
 
         Member::create($request->all());
 
-        return redirect()->route('member.index')->with('message', 'Outlet added successfully!');
+        return redirect()->route('member.index')->with('message', 'Berhasil Menambahkan Member!');
     }
 
     /**
@@ -83,7 +82,7 @@ class MemberController extends Controller
     public function edit(Member $member)
     {
         return view('member.edit', [
-            'title' => 'Edit Membership',
+            'title' => 'Mengubah Data Membership',
             'member' => $member
         ]);
     }
@@ -102,7 +101,15 @@ class MemberController extends Controller
         $member = Member::find($id);
         $member->update($data);
 
-        return redirect()->route('member.index')->with('message', 'outlet updated successfully!');
+        $this->validate($request , [
+            'nama' => 'required|alpha|max:255',
+            'alamat' => 'required|alpha|max:255',
+            'jenis_kelamin' => 'required',
+            'telepon' => 'required|numeric'
+
+        ]);
+
+        return redirect()->route('member.index')->with('message', 'Berhasil Memperbarui Member!');
     }
 
     /**
@@ -117,6 +124,6 @@ class MemberController extends Controller
         $id->delete();
 
 
-        return redirect()->route('member.index')->with('message', 'Outlet deleted successfully!');
+        return redirect()->route('member.index')->with('message', 'Berhasil Menghapus Member!');
     }
 }

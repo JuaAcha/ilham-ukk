@@ -18,7 +18,7 @@
     <thead>
         <tr style="background-color: #424242; color: white;">
             <th>No</th>
-            <th>Full Name</th>
+            <th>Nama</th>
             <th>Email</th>
             {{-- <th>Outlet</th> --}}
             <th>Roles</th>

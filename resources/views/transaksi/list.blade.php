@@ -72,7 +72,7 @@
                         @method('delete')
                         <button type="submit" class="btn rounded-circle py-2"
                             style="background-color: rgb(148, 148, 148);"
-                            onclick="return confirm('Are you sure to delete this?')"><i
+                            onclick="return confirm('Apakah Anda yakin Untuk menghapus Data ini?')"><i
                                 class="fas fa-fw fa-trash text-white"></i></button>
                     </form>
                     <a href="{{ url('/dashboard/laporan-transaksi/'. $trx->kode_invoice) }}" class="btn ml-2 rounded-circle py-2"

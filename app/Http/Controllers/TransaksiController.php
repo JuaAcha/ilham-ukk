@@ -12,7 +12,6 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-
 class TransaksiController extends Controller
 {
     /**
@@ -40,17 +39,16 @@ class TransaksiController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $req)
     {
         $outlet = Outlet::all();
         $member = Member::all();
         $transaksi = Transaksi::with(['outlet', 'member'])->get();
 
-
         return view('transaksi.create', [
-            'title' => 'New Transaksi',
-            'outlet' => $outlet,
+            'title' => 'Menambah Transaksi Baru',
             'member' => $member,
+            'outlet' => $outlet,
             'transaksi' => $transaksi
         ]);
 
@@ -64,7 +62,7 @@ class TransaksiController extends Controller
      */
     public function store(Request $request)
     {
-        $invoice = 'INV-'. Str::random(6);
+        $invoice = 'LAUND-'. Str::random(6);
         $user = Auth::user()->id;
 
         Transaksi::create([
@@ -82,16 +80,12 @@ class TransaksiController extends Controller
             'id_user' => $user,
         ]);
 
-        // $validate = Validate::make($request->all(), [
-        //     'id_outlet' => ['required'],
-        //     'id_member' => ['required']
-        // ]);
+        $this->validate($request , [
+            'id_outlet' => 'required',
+            'id_member' => 'required',
+        ]);
 
-        // if($validate->fails()){
-        //     return response()->json($validate->errors(), 422);
-        // }
-
-        return redirect('/dashboard/transaksi/bayar/'.$invoice)->with('message', 'Berhasil Menambahkan Transaksi!');
+        return redirect('/dashboard/transaksi/bayar/'.$invoice)->with('message', 'Data Transaksi Berhasil diTambahkan!');
     }
 
     /**
@@ -123,8 +117,9 @@ class TransaksiController extends Controller
             'transaksi' => $transaksi,
             'paket' => $paket,
             'details' => $transaksiDetail
-
         ]);
+
+        
     }
 
   
@@ -151,14 +146,14 @@ class TransaksiController extends Controller
                     <label for="keterangan"
                         class="form-label">Deskripsi</label>
                     <textarea class="form-control" id="keterangan" name = "keterangan"
-                        rows="3" aria-label="Disabled input example" readonly>-</textarea>
+                        rows="3" aria-label="Disabled input example" readonly>'.$paket->nama_paket.' dan Harganya Rp.'.number_format($paket->harga,0,',','.') .'</textarea>
                 </div>
                 
 
                 <div class="col-12">
                 <label for="qty"
-                        class="form-label mt-2">Jumlah Barang</label>
-                <input type="number" name="qty" id="qty" class="form-control mb-3" min="1" required>
+                        class="form-label mt-2">Berat/kg</label>
+                <input type="number" name="qty" id="qty" class="form-control mb-3" min="0" required>
                 </div>
                 
                 <div class="col-md-4 col-12">
@@ -176,8 +171,9 @@ class TransaksiController extends Controller
 
       public function tambahpaket(Request $req, $id_transaksi, $id_paket)
     {
+
         $validate = $req->validate([
-            'qty' => ['required'],
+            'qty' => ['required|numeric|min:0'],
             'keterangan' => ['max:255']
         ]);
 
@@ -203,11 +199,12 @@ class TransaksiController extends Controller
     {
         $transaksi = Transaksi::find($id);
         $details = TransaksiDetail::where('id_transaksi', $id)->get();
-        $validate = $req->validate([
-            'batas_waktu' => ['required'],
-            'biaya_tambahan' => ['max:255'],
-            'pajak' => ['max:255'],
-            'diskon' => ['max:255']
+
+        $this->validate($req , [
+            'batas_waktu' => 'required|date',
+            'biaya_tambahan' => 'required|numeric',
+            'pajak' => 'required|numeric',
+            'diskon' => 'required|numeric'
         ]);
 
         $subtotal=0;
@@ -257,8 +254,14 @@ class TransaksiController extends Controller
         $data['status'] = $req->status;
         $data['tgl_bayar'] = $req->tgl_bayar;
 
+        $this->validate($req , [
+            'dibayar' => 'required',
+            'status' => 'required',
+            'tgl_bayar' => 'required|date'
+        ]);
+
         Transaksi::where('id',$id)->update($data);
-        return redirect()->route('transaksi.index')->with('message', 'Data Transaksi Berhasil Diperbarui!');
+        return redirect()->route('transaksi.index')->with('message', 'Data Transaksi berhasil di Perbarui!');
 
     }
 
@@ -274,6 +277,6 @@ class TransaksiController extends Controller
         $id->delete();
 
 
-        return redirect()->back()->with('message', 'Berhasil Menghapus Transaksi!');
+        return redirect()->back()->with('message', 'Data Transaksi berhasil di Hapus!');
     }
 }

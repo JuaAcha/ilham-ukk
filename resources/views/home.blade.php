@@ -27,6 +27,7 @@
         <div class="col-xl-3 col-md-6 mb-4">
             <div class="card border-left-primary shadow h-100 py-2">
                 <div class="card-body">
+
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Pelanggan</div>
@@ -95,6 +96,32 @@
             </div>
         </div>
     </div>
+
+    <form action="" method="GET">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <label>Pencarian Tanggal Transaksi</label>
+                            <input type="date" name="status" value="{{  date('Y-m-d') }}" class="form-control" />
+                        </div>
+                        <!-- <div class="col-md-3">
+                            <label>Pencarian Status</label>
+                            <select name="status" class="form-select">
+                                <option value="">Pilih Status</option>
+                                <option value="baru">Baru</option>
+                                <option value="proses">Proses</option>
+                                <option value="diambil">Diambil</option>
+                                <option value="selesai">Selesai</option>
+                            </select>
+                        </div> -->
+                        <div class="col-md-6">
+                            <hr>
+                            <button type="submit" class="btn btn-primary">search</button>
+                        </div>
+                    </div>
+                </form>
+                <hr>
+
+
     <div class="row">
         <div class="col-md-3 col-12">
             <a href="{{ url('/home/generate-data') }}" class="btn btn-primary mb-2" style="background-color: #424242; color: white;">Cetak Data</a>

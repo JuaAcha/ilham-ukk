@@ -103,7 +103,7 @@
                                         <tr>
                                             <th>No</th>
                                             <th>Paket</th>
-                                            <th>Jumlah Barang</th>
+                                            <th>Berat/kg</th>
                                             <th>Harga</th>
                                             <th>#</th>
                                         </tr>
@@ -121,7 +121,7 @@
                                                     @method('delete')
                                                     <button type="submit" class="btn btn-sm btn-danger"
                                                         style="border-radius: 13px;"
-                                                        onclick="return confirm('Are you sure to delete this?')"><i
+                                                        onclick="return confirm('Apakah Anda yakin Untuk menghapus Data ini?')"><i
                                                             class="fas fa-fw fa-trash"></i></button>
                                                 </form>
                                             </td>
