@@ -6,7 +6,6 @@ use App\User;
 use App\Paket;
 use App\Member;
 use App\Transaksi;
-use Illuminate\Support\Carbon;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -27,7 +26,6 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index()
-
     {
         $users = User::count();
         $member = Member::count();
